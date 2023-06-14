@@ -20,19 +20,18 @@ def test_save_country_name(page:Page):
         country_name_option.click()
         country_title = page.locator(country_title_selector).nth(0).inner_text()
         #print(country_title)
+
         sub_country_list = page.locator(sub_country_list_selector)
         total_sub_country = sub_country_list.count()
-        for sub_country_index in range(1,total_sub_country):
-            sub_country_name = sub_country_list.nth(sub_country_index).locator(sub_country_data_selector).nth(1).inner_text()
-            #print(sub_country_name)
-            
-            # Store Data into CSV File ---- Start From Here ----
-            # Header
-            header = ['Country Name']
-            # File path to save the CSV
-            file_path = f'{country_name}.csv'
-            with open(file_path, 'w', newline='') as csvfile:
-                csv_writer = csv.writer(csvfile)
-                csv_writer.writerow(header)
+        # Header
+        header = ['Country Name']
+        # File path to save the CSV
+        file_path = f'{country_name}.csv'
+        # Store Data into CSV File ---- Start From Here ----
+        with open(file_path, 'a', newline='') as csvfile:
+            csv_writer = csv.writer(csvfile)
+            csv_writer.writerow(header)
+            for sub_country_index in range(1,total_sub_country):
+                sub_country_name = sub_country_list.nth(sub_country_index).locator(sub_country_data_selector).nth(1).inner_text()
                 csv_writer.writerow([sub_country_name])
-            print('Data stored in CSV successfully.')
+                print('Data stored in CSV successfully.')
