@@ -1,5 +1,6 @@
 from playwright.sync_api import Page
 from openpyxl import Workbook
+import os
 
 def test_save_country_name(page:Page):
     country_section_selector = "#nav ul"
@@ -29,5 +30,12 @@ def test_save_country_name(page:Page):
             sub_country_name = sub_country_list.nth(sub_country_index).locator(sub_country_data_selector).nth(1).inner_text()
             ws.append([sub_country_name])
 
-        file_directory = 'Country_List_Data'
-        wb.save(f"{country_name}.xlsx")
+        file_directory = 'Country_List_EXCEL_Data'
+        if not os.path.exists(file_directory):
+            os.makedirs(file_directory)
+        
+        file_path = os.path.join(file_directory, f'{country_name}.xlsx')
+
+        # Create the directory if it doesn't exist
+
+        wb.save(file_path)

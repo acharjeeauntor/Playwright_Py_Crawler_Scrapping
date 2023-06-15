@@ -1,5 +1,6 @@
 from playwright.sync_api import Page
 import csv
+import os
 
 def test_save_country_name(page:Page):
     country_section_selector = "#nav ul"
@@ -23,7 +24,11 @@ def test_save_country_name(page:Page):
         # Header
         header = ['Country Name']
         # File path to save the CSV
-        file_path = f'{country_name}.csv'
+        file_directory = 'Country_List_CSV_Data'
+        if not os.path.exists(file_directory):
+            os.makedirs(file_directory)
+        
+        file_path = os.path.join(file_directory, f'{country_name}.csv')
         # Store Data into CSV File ---- Start From Here ----
         with open(file_path, 'a', newline='') as csvfile:
             csv_writer = csv.writer(csvfile)

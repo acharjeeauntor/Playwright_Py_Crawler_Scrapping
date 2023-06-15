@@ -32,7 +32,7 @@ def test_save_country_name(page:Page):
             sub_country_names.append(sub_country_name)
         data[country_name] = sub_country_names
 
-        file_directory = 'Country_List_Data'
+        file_directory = 'Country_List_JSON_Data'
         file_path = os.path.join(file_directory, f'{country_name}.json')
 
         # Create the directory if it doesn't exist
