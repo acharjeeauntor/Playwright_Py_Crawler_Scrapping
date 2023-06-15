@@ -20,6 +20,7 @@ def test_save_country_name(page:Page):
 
         sub_country_list = page.locator(sub_country_list_selector)
         total_sub_country = sub_country_list.count()
+        
         wb = Workbook()
         ws = wb.active
         ws['A1'] = 'Country Name'
@@ -27,4 +28,6 @@ def test_save_country_name(page:Page):
         for sub_country_index in range(1,total_sub_country):
             sub_country_name = sub_country_list.nth(sub_country_index).locator(sub_country_data_selector).nth(1).inner_text()
             ws.append([sub_country_name])
+
+        file_directory = 'Country_List_Data'
         wb.save(f"{country_name}.xlsx")
